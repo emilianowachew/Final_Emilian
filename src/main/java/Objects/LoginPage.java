@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.regex.Pattern;
 
 public class LoginPage {
     public static final String PAGE_URL = "http://training.skillo-bg.com:4200/users/login";
@@ -16,10 +17,12 @@ public class LoginPage {
         this.webDriver = driver;
     }
 
-    public boolean isUrlLoaded(){
+    public boolean isUrlLoaded() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
-        return wait.until(ExpectedConditions.urlToBe(PAGE_URL));
+        return wait.until(ExpectedConditions.urlMatches(Pattern.quote(PAGE_URL)));
     }
+
+
 
     public void fillInUserName(String username){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));

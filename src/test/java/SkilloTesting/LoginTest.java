@@ -5,18 +5,13 @@ import Objects.HomePage;
 import Objects.LoginPage;
 import Objects.ProfilePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class LoginPageTest {
+public class LoginTest {
 
     ChromeDriver webDriver;
     private boolean userReg = false;
@@ -36,7 +31,8 @@ public class LoginPageTest {
         if (webDriver != null) {
             webDriver.close();
         }
-
+        if(userReg == true){
+        }
     }
 
     @DataProvider(name="getUser")
@@ -56,21 +52,20 @@ public class LoginPageTest {
 
         homePage.navigateTo();
         Assert.assertTrue(homePage.isUrlLoaded(), "Home page is not loaded");
-
+        
+        header.clickLogin();
+        
         Assert.assertTrue(loginPage.isUrlLoaded(), "Current page is not Login");
-
         loginPage.fillInUserName(username);
         loginPage.fillInPassword(password);
 
         loginPage.checkRememberMe();
-
         Assert.assertTrue(loginPage.isCheckedRememberMe(), "Remember me checkbox is not checked.");
+
         loginPage.clickSignIn();
 
         header.clickProfile();
-
         Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page in not profile page for " + userId + " user");
-
 
         Assert.assertTrue(profilePage.isUrlLoaded(), "Current page is not profile page");
     }
