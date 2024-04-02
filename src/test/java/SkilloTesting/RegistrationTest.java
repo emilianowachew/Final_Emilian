@@ -2,11 +2,17 @@ package SkilloTesting;
 
 import Objects.*;
 import com.github.javafaker.Faker;
+import com.github.javafaker.File;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class RegistrationTest {
@@ -64,6 +70,21 @@ public class RegistrationTest {
 
         Assert.assertTrue(homePage.isUrlLoaded(), "Current page is not homepage.");
 
+
+
+        }
+    private void takeScreenshot(ITestResult testResult){
+        if(ITestResult.FAILURE == testResult.getStatus()){
+            try{
+                TakesScreenshot takesScreenshot = (TakesScreenshot) webDriver;
+                File screeshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
+                String testName = testResult.getName();
+                FileUtils.copyFile(screenshot, new File(SCREENSHOTS_DIR.concat(testName).concat(".jpg")));
+            }catch (IOException e){
+                System.out.println("Unable to create a screenshot file: " + e.getMessage());
+            }
+        }
     }
-}
+    }
+
 
