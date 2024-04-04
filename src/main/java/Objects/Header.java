@@ -24,4 +24,9 @@ public class Header {
         WebElement profilePageLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-link-profile")));
         profilePageLink.click();
     }
+    public  void clickHome() {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebElement homePageLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-link-home")));
+        homePageLink.click();
+    }
 }

@@ -2,7 +2,6 @@ package SkilloTesting;
 
 import Objects.*;
 import com.github.javafaker.Faker;
-import com.github.javafaker.File;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -12,6 +11,7 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -31,15 +31,16 @@ public class RegistrationTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterTest() {
+    public void afterTest(ITestResult result) {
         if (webDriver != null) {
-            webDriver.close();
+            webDriver.quit();
         }
-        if (userReg == true) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot(result);
+            System.out.println("Screenshot taken for failed test: " + result.getName());
         }
-
-
     }
+
 
     @DataProvider(name = "userData")
     public static Object[][] getUserData() {
@@ -59,7 +60,6 @@ public class RegistrationTest {
 
         RegistrationPage registrationPage = new RegistrationPage(webDriver);
         HomePage homePage = new HomePage(webDriver);
-
         registrationPage.navigateTo();
         Assert.assertTrue(registrationPage.isUrlLoaded());
         registrationPage.fillInUserName(Username);
@@ -73,18 +73,21 @@ public class RegistrationTest {
 
 
         }
-    private void takeScreenshot(ITestResult testResult){
-        if(ITestResult.FAILURE == testResult.getStatus()){
-            try{
+    private void takeScreenshot(ITestResult testResult) {
+        System.out.println("Taking screenshot...");
+        if (testResult.getStatus() != ITestResult.SUCCESS) {
+            try {
                 TakesScreenshot takesScreenshot = (TakesScreenshot) webDriver;
-                File screeshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
+                java.io.File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
                 String testName = testResult.getName();
-                FileUtils.copyFile(screenshot, new File(SCREENSHOTS_DIR.concat(testName).concat(".jpg")));
-            }catch (IOException e){
+                String SCREENSHOTS_DIR = "src/test/java/SkilloTesting/SCREENSHOTS";
+                FileUtils.copyFile(screenshot, new File(SCREENSHOTS_DIR.concat(testName).concat(".jpeg")));
+            } catch (IOException e) {
                 System.out.println("Unable to create a screenshot file: " + e.getMessage());
             }
         }
     }
+
     }
 
 
