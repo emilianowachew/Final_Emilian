@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ProfilePage {
-    public static final String PAGE_URL = "http://training.skillo-bg.com:4200/users/";
+    public static final String PROFILE_URL = "http://training.skillo-bg.com:4200/users/";
     private final WebDriver webDriver;
     public ProfilePage(WebDriver driver){
         this.webDriver = driver;
@@ -15,11 +15,11 @@ public class ProfilePage {
 
     public boolean isUrlLoaded(){
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-        return wait.until(ExpectedConditions.urlContains(PAGE_URL));
+        return wait.until(ExpectedConditions.urlContains(PROFILE_URL));
     }
     public boolean isUrlLoaded(String userId){
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-        return wait.until(ExpectedConditions.urlToBe(PAGE_URL+userId));
+        return wait.until(ExpectedConditions.urlToBe(PROFILE_URL+userId));
     }
 }
 

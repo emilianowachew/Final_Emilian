@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.regex.Pattern;
 
 public class LoginPage {
-    public static final String PAGE_URL = "http://training.skillo-bg.com:4200/users/login";
+    public static final String LOGIN_URL = "http://training.skillo-bg.com:4200/users/login";
     private final WebDriver webDriver;
 
     public LoginPage(WebDriver driver){
@@ -19,7 +19,7 @@ public class LoginPage {
 
     public boolean isUrlLoaded() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
-        return wait.until(ExpectedConditions.urlMatches(Pattern.quote(PAGE_URL)));
+        return wait.until(ExpectedConditions.urlMatches(Pattern.quote(LOGIN_URL)));
     }
 
 
