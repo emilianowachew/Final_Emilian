@@ -5,7 +5,7 @@ Hello! My name is Emilian and this is my final iSkillo project for the automatio
 
 1.1 The Header Object contains the click of the Profile, Home, NewPost buttons
 
-1.2 The HomePage Object contains the URL(homepage), its navigation, assert for the URl, click of the LikeElement and a test if it is correctly liked.
+1.2 The HomePage Object contains the URL(homepage), its navigation, assert for the URl, click of the LikeElement and a test if it is correctly liked. Also, click of the follow element and a test if it is correctly clicked.
 
 1.3 The LoginPage Object contains the URL(loginpage), assert for the URL, filling of username, password, rememberme button check, assert for it and SignIn button click.
 
@@ -30,3 +30,5 @@ I have done it with a lot of effort to make sure that every field is filled with
 However, the iSkillo platform returns "Registration Failed". I have tried to manually retest this error but without any success.
  The strangest thing is that for every field incorrectly filled there is a particular error. Here they are all with ticks, the button is clicked but the iSkillo
 returns an error. After discussion with @Vidko, probably there is a bug with the platform which causes this error.
+
+2.5 FollowTest is a test that executes a successful login, finds the follow button for a particular user, follows him and monitors all actions by asserts.

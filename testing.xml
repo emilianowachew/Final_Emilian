@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.og/testng-1.0.dtd" >
+
+<suite name="Skillo Project Emilian" verbose="1">
+    <test name="Tests">
+        <classes>
+            <class name="SkilloTesting.LikePostTest"></class>
+            <class name="SkilloTesting.LoginTest"></class>
+            <class name="SkilloTesting.PostCreationTest"></class>
+            <class name="SkilloTesting.RegistrationTest"></class>
+        </classes>
+    </test>
+</suite>

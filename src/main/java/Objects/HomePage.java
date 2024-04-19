@@ -38,4 +38,14 @@ public class HomePage {
         WebElement likeButtonHeart = webDriver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/div[2]/div/div[1]/i[1]"));
         return likeButtonHeart.isDisplayed();
     }
+    public void followElement() {
+        WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
+        WebElement followButtonElement = webDriver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/app-small-user-profile/div/div[2]/button"));
+        wait.until(ExpectedConditions.elementToBeClickable(followButtonElement));
+        followButtonElement.click();
+    }
+    public boolean isElementFollowed() {
+        WebElement followButtonElement = webDriver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/app-small-user-profile/div/div[2]/button"));
+        return followButtonElement.isDisplayed();
+    }
 }
