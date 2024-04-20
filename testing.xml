@@ -7,6 +7,7 @@
             <class name="SkilloTesting.LoginTest"></class>
             <class name="SkilloTesting.PostCreationTest"></class>
             <class name="SkilloTesting.RegistrationTest"></class>
+            <class name="SkilloTesting.FollowTest"></class>
         </classes>
     </test>
 </suite>

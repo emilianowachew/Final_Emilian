@@ -32,3 +32,8 @@ However, the iSkillo platform returns "Registration Failed". I have tried to man
 returns an error. After discussion with @Vidko, probably there is a bug with the platform which causes this error.
 
 2.5 FollowTest is a test that executes a successful login, finds the follow button for a particular user, follows him and monitors all actions by asserts.
+
+I have also created a test.xml file for the mvn clean test to be executed. It works perfectly fine.
+
+
+I want to say a huge thanks to our lectors, they were great during the whole course!
