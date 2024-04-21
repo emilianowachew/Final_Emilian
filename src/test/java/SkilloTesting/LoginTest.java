@@ -84,7 +84,7 @@ public class LoginTest {
                 TakesScreenshot takesScreenshot = (TakesScreenshot) webDriver;
                 java.io.File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
                 String testName = testResult.getName();
-                String SCREENSHOTS_DIR = "src/test/java/SkilloTesting/SCREENSHOTS";
+                String SCREENSHOTS_DIR = "src/test/java/SkilloTesting/SCREENSHOTS/";
                 FileUtils.copyFile(screenshot, new File(SCREENSHOTS_DIR.concat(testName).concat(".jpeg")));
             } catch (IOException e) {
                 System.out.println("Unable to create a screenshot file: " + e.getMessage());
