@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class RegistrationTest {
-
     ChromeDriver webDriver;
     private boolean userReg = false;
 
@@ -32,12 +31,12 @@ public class RegistrationTest {
 
     @AfterMethod(alwaysRun = true)
     public void afterTest(ITestResult result) {
-        if (webDriver != null) {
-            webDriver.quit();
-        }
         if (result.getStatus() == ITestResult.FAILURE) {
             takeScreenshot(result);
             System.out.println("Screenshot taken for failed test: " + result.getName());
+        }
+        if (webDriver != null) {
+            webDriver.quit();
         }
     }
 
@@ -69,10 +68,8 @@ public class RegistrationTest {
         registrationPage.clickSignIn();
 
         Assert.assertTrue(homePage.isUrlLoaded(), "Current page is not homepage.");
+    }
 
-
-
-        }
     private void takeScreenshot(ITestResult testResult) {
         System.out.println("Taking screenshot...");
         if (testResult.getStatus() != ITestResult.SUCCESS) {
@@ -87,7 +84,6 @@ public class RegistrationTest {
             }
         }
     }
-
-    }
+}
 
 

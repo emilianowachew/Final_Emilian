@@ -24,7 +24,6 @@ public class HomePage {
     public boolean isUrlLoaded() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.urlToBe(HOME_URL));
-
     }
 
     public void likeElement() {

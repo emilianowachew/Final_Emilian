@@ -56,7 +56,6 @@ public class RegistrationPage {
         public void navigateTo () {
             this.webDriver.get(REGISTRATION_URL);
         }
-
 }
 
 

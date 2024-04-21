@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class LikePostTest {
-
     ChromeDriver webDriver;
     private boolean userReg = false;
 
@@ -34,11 +33,13 @@ public class LikePostTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterTest() {
-        if (webDriver != null) {
-            webDriver.close();
+    public void afterTest(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot(result);
+            System.out.println("Screenshot taken for failed test: " + result.getName());
         }
-        if (userReg == true) {
+        if (webDriver != null) {
+            webDriver.quit();
         }
     }
 
