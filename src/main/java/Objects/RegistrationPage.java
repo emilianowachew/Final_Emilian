@@ -31,7 +31,7 @@ public class RegistrationPage {
 
     public void fillInEmail(String email) {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
-        WebElement passwordTextField = wait.until(ExpectedConditions.visibilityOf(webDriver.findElement(By.xpath("/html/body/app-root/div[2]/app-register/div/div/form/div[2]/input"))));
+        WebElement passwordTextField = wait.until(ExpectedConditions.visibilityOf(webDriver.findElement(By.cssSelector("input[placeholder='email']"))));
         passwordTextField.sendKeys(email);
     }
 
