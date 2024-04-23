@@ -38,13 +38,13 @@ public class LoginPage {
 
     public void checkRememberMe(){
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
-        WebElement rememberMeCheckbox = webDriver.findElement(By.xpath("//*[@class='remember-me']/input[@type='checkbox']"));
+        WebElement rememberMeCheckbox = webDriver.findElement(By.cssSelector("[class='remember-me'] input[type='checkbox']"));
         wait.until(ExpectedConditions.elementToBeClickable(rememberMeCheckbox));
         rememberMeCheckbox.click();
     }
 
     public boolean isCheckedRememberMe(){
-        WebElement rememberMeCheckbox = webDriver.findElement(By.xpath("//*[@class='remember-me']/input[@type='checkbox']"));
+        WebElement rememberMeCheckbox = webDriver.findElement(By.cssSelector("[class='remember-me'] input[type='checkbox']"));
         return rememberMeCheckbox.isSelected();
     }
 

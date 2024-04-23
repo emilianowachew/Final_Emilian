@@ -13,11 +13,12 @@ import java.time.Duration;
 public class PostPage {
     private final WebDriver webDriver;
 
-    @FindBy(xpath = "//h3[text()='Post a picture to share with your awesome followers']")
+    @FindBy(xpath = "//h3[contains(text(),'Post a picture to share with your awesome followers')]")
     private WebElement newPostTitle;
 
-    @FindBy(xpath = "//input[@class='form-control input-lg'][@type='text']")
+    @FindBy(xpath = "//input[@class='form-control input-lg' and @type='text']")
     private WebElement uploadPictureText;
+
 
     @FindBy(name = "caption")
     private WebElement postCaption;
