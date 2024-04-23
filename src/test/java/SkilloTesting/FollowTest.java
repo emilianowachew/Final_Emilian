@@ -1,9 +1,6 @@
 package SkilloTesting;
 
-import Objects.Header;
-import Objects.HomePage;
-import Objects.LoginPage;
-import Objects.ProfilePage;
+import Objects.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -20,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 public class FollowTest {
     ChromeDriver webDriver;
-    private boolean userReg = false;
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest() {

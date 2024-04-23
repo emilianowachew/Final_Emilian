@@ -28,15 +28,15 @@ public class HomePage {
 
     public void likeElement() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
-        WebElement likeButtonHeart = webDriver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/div[2]/div/div[1]/i[1]"));
+        WebElement likeButtonHeart = webDriver.findElement(By.cssSelector("app-post-detail i.far.fa-heart"));
         wait.until(ExpectedConditions.elementToBeClickable(likeButtonHeart));
         likeButtonHeart.click();
     }
-
     public boolean isElementLiked() {
-        WebElement likeButtonHeart = webDriver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/div[2]/div/div[1]/i[1]"));
+        WebElement likeButtonHeart = webDriver.findElement(By.cssSelector("app-post-detail i.far.fa-heart"));
         return likeButtonHeart.isDisplayed();
     }
+
     public void followElement() {
         WebDriverWait wait = new WebDriverWait(this.webDriver, Duration.ofSeconds(15));
         WebElement followButtonElement = webDriver.findElement(By.xpath("/html/body/app-root/div[2]/app-all-posts/div/div/div[1]/app-post-detail/div/app-small-user-profile/div/div[2]/button"));

@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
     ChromeDriver webDriver;
-    private boolean userReg = false;
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest() {
