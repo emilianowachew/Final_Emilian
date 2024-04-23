@@ -21,8 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TestObject {
-    public static final String TEST_RESOURCES_DIR = "src\\test\\resources\\";
-    public static final String SCREENSHOTS_DIR = TEST_RESOURCES_DIR.concat("screenshots\\");
+    public static final String SCREENSHOTS_DIR = "src/test/java/SkilloTesting/SCREENSHOTS/";
     private WebDriver webDriver;
     @BeforeSuite
     protected final void setupTestSuite() throws  IOException{
@@ -37,17 +36,17 @@ public class TestObject {
         this.webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         this.webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
-    @AfterMethod
-    protected final void takeScreenshots(ITestResult testResult){
-        takeScreenshot(testResult);
-        quitDriver();
-    }
-
-    private void quitDriver() {
-        if (this.webDriver != null){
-            this.webDriver.quit();
+    @AfterMethod(alwaysRun = true)
+    public void afterTest(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot(result);
+            System.out.println("Screenshot taken for failed test: " + result.getName());
+        }
+        if (webDriver != null) {
+            webDriver.quit();
         }
     }
+
 
     protected WebDriver getWebDriver(){
         return webDriver;

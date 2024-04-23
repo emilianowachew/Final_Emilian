@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -15,44 +16,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class FollowTest {
-    ChromeDriver webDriver;
-
-    @BeforeMethod(alwaysRun = true)
-    public void beforeTest() {
-        WebDriverManager.chromedriver().setup();
-        webDriver = new ChromeDriver();
-
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void afterTest(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            takeScreenshot(result);
-            System.out.println("Screenshot taken for failed test: " + result.getName());
-        }
-        if (webDriver != null) {
-            webDriver.quit();
-        }
-    }
-
+public class FollowTest extends TestObject {
     @DataProvider(name = "getUser")
     public Object[][] getUsers() {
         return new Object[][]{
                 {"emilian", "123456", "5488"},
         };
     }
-
     @Test(dataProvider = "getUser")
     public void loginTest(String username, String password, String userId) {
-
-        HomePage homePage = new HomePage(webDriver);
-        Header header = new Header(webDriver);
-        LoginPage loginPage = new LoginPage(webDriver);
-        ProfilePage profilePage = new ProfilePage(webDriver);
+        WebDriver driver = super.getWebDriver();
+        HomePage homePage = new HomePage(driver);
+        Header header = new Header(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        ProfilePage profilePage = new ProfilePage(driver);
 
         homePage.navigateTo();
         Assert.assertTrue(homePage.isUrlLoaded(), "Home page is not loaded");
@@ -76,20 +53,5 @@ public class FollowTest {
 
         homePage.isElementFollowed();
         Assert.assertTrue(homePage.isElementFollowed(), "The element is not liked");
-    }
-
-    private void takeScreenshot(ITestResult testResult) {
-        System.out.println("Taking screenshot...");
-        if (testResult.getStatus() != ITestResult.SUCCESS) {
-            try {
-                TakesScreenshot takesScreenshot = (TakesScreenshot) webDriver;
-                java.io.File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
-                String testName = testResult.getName();
-                String SCREENSHOTS_DIR = "src/test/java/SkilloTesting/SCREENSHOTS/";
-                FileUtils.copyFile(screenshot, new File(SCREENSHOTS_DIR.concat(testName).concat(".jpeg")));
-            } catch (IOException e) {
-                System.out.println("Unable to create a screenshot file: " + e.getMessage());
-            }
-        }
     }
 }

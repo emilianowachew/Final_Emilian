@@ -19,27 +19,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
-public class PostCreationTest{
-    ChromeDriver webDriver;
-    @BeforeMethod(alwaysRun = true)
-    public void beforeTest() {
-        WebDriverManager.chromedriver().setup();
-        webDriver = new ChromeDriver();
+public class PostCreationTest extends TestObject{
 
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-    @AfterMethod(alwaysRun = true)
-    public void afterTest(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            takeScreenshot(result);
-            System.out.println("Screenshot taken for failed test: " + result.getName());
-        }
-        if (webDriver != null) {
-            webDriver.quit();
-        }
-    }
     @DataProvider(name="getUser")
     public Object[][] getUsers(){
         File postPicture = new File("src/main/resources/picture1.jpg");
@@ -50,12 +31,12 @@ public class PostCreationTest{
     }
     @Test(dataProvider = "getUser")
     public void testCreatePost(String username, String password, String userId, File postPicture, String caption){
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = super.getWebDriver();
+        HomePage homePage = new HomePage(driver);
+        Header header = new Header(driver);
         LoginPage loginPage = new LoginPage(driver);
         ProfilePage profilePage = new ProfilePage(driver);
         PostPage postPage = new PostPage(driver);
-        HomePage homePage = new HomePage(driver);
-        Header header = new Header(driver);
 
         homePage.navigateTo();
         Assert.assertTrue(homePage.isUrlLoaded(), "Home page is not loaded");
@@ -89,19 +70,5 @@ public class PostCreationTest{
         Assert.assertTrue(profilePage.isUrlLoaded(userId), "Current page in not profile page for " + userId + " user");
 
 
-    }
-    private void takeScreenshot(ITestResult testResult) {
-        System.out.println("Taking screenshot...");
-        if (testResult.getStatus() != ITestResult.SUCCESS) {
-            try {
-                TakesScreenshot takesScreenshot = (TakesScreenshot) webDriver;
-                java.io.File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
-                String testName = testResult.getName();
-                String SCREENSHOTS_DIR = "src/test/java/SkilloTesting/SCREENSHOTS/";
-                FileUtils.copyFile(screenshot, new File(SCREENSHOTS_DIR.concat(testName).concat(".jpeg")));
-            } catch (IOException e) {
-                System.out.println("Unable to create a screenshot file: " + e.getMessage());
-            }
-        }
     }
 }
