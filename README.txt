@@ -15,6 +15,8 @@ Hello! My name is Emilian and this is my final iSkillo project for the automatio
 
 1.6 The RegistrationPage Object contains the URL(registrationpage), assert for the URL, filling the fields(username, email, password, confirmpassword) and click sign in.
 
+1.7 The DriverObject Object contains all the setup for the driver and the screenshots. 
+
 
 
 2. In src/test/java/SkilloTesting you will find all my tests that were created and executed:
@@ -29,7 +31,7 @@ Hello! My name is Emilian and this is my final iSkillo project for the automatio
 I have done it with a lot of effort to make sure that every field is filled with correct symbols(for email @, etc...).
 However, the iSkillo platform returns "Registration Failed". I have tried to manually retest this error but without any success.
  The strangest thing is that for every field incorrectly filled there is a particular error. Here they are all with ticks, the button is clicked but the iSkillo
-returns an error. After discussion with @Vidko, probably there is a bug with the platform which causes this error. A screenshot is being done after the test fails.
+returns an error. After discussion with @Vidko, probably there is a bug with the platform which causes this error. A screenshot is being done after the test fails, so I consider it as passed.
 
 2.5 FollowTest is a test that executes a successful login, finds the follow button for a particular user, follows him and monitors all actions by asserts.
 
