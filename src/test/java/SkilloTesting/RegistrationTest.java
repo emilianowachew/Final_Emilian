@@ -2,21 +2,11 @@ package SkilloTesting;
 
 import Objects.*;
 import com.github.javafaker.Faker;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-public class RegistrationTest extends TestObject {
+public class RegistrationTest extends DriverObject {
 
     @DataProvider(name = "userData")
     public static Object[][] getUserData() {
@@ -38,6 +28,8 @@ public class RegistrationTest extends TestObject {
         HomePage homePage = new HomePage(driver);
         registrationPage.navigateTo();
         Assert.assertTrue(registrationPage.isUrlLoaded());
+        registrationPage.isSignInButtonLoaded();
+        Assert.assertTrue(registrationPage.isSignInButtonLoaded(),"The sign in button is not loaded");
         registrationPage.fillInUserName(Username);
         registrationPage.fillInEmail(email);
         registrationPage.fillInPassword(password);

@@ -52,6 +52,10 @@ public class RegistrationPage {
         WebElement signInButton = wait.until(ExpectedConditions.elementToBeClickable(webDriver.findElement(By.id("sign-in-button"))));
         signInButton.click();
     }
+    public boolean isSignInButtonLoaded() {
+        WebElement signInElement = webDriver.findElement(By.id("sign-in-button"));
+        return signInElement.isDisplayed();
+    }
 
         public void navigateTo () {
             this.webDriver.get(REGISTRATION_URL);
